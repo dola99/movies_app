@@ -24,8 +24,8 @@ class _SplachScreenState extends State<SplachScreen>
         vsync: this, duration: const Duration(milliseconds: 600))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          Navigator.of(context).pushReplacement(ThisIsFadeRoute(
-              route: const HomeScreen(), page: const HomeScreen()));
+          Navigator.of(context).pushReplacement(
+              ThisIsFadeRoute(route: HomeScreen(), page: HomeScreen()));
           Timer(const Duration(milliseconds: 300), () {
             animationController.reset();
           });

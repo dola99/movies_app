@@ -1,3 +1,5 @@
+import 'package:movie_app/core/constant.dart';
+
 class MoviesResponse {
   Dates? dates;
   int? page;
@@ -62,7 +64,7 @@ class Dates {
 class Results {
   bool? adult;
   String? backdropPath;
-  List<int>? genreIds;
+  List<dynamic>? genreIds;
   int? id;
   String? originalLanguage;
   String? originalTitle;
@@ -93,14 +95,15 @@ class Results {
 
   Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
-    backdropPath = json['backdrop_path'];
-    genreIds = json['genre_ids'].cast<int>();
+    backdropPath = "https://image.tmdb.org/t/p/w500${json['backdrop_path']}";
+
+    genreIds = json['genre_ids'];
     id = json['id'];
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
     popularity = json['popularity'];
-    posterPath = json['poster_path'];
+    posterPath = "https://image.tmdb.org/t/p/w500${json['poster_path']}";
     releaseDate = json['release_date'];
     title = json['title'];
     video = json['video'];

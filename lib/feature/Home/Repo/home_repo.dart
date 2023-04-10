@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:movie_app/Model/movies_model.dart';
@@ -56,8 +57,10 @@ class HomeRepo {
           path: constant.latestMoviesEndPoint,
           queryParameters: {'api_key': constant.apiKey}),
     );
+
     if (response.statusCode >= 200 && response.statusCode <= 499) {
       var decodedResoponse = jsonDecode(response.body);
+      log('Lastes Movies is $decodedResoponse');
       if (response.statusCode >= 200 && response.statusCode <= 299) {
         return Right(MoviesResponse.fromJson(decodedResoponse));
       } else {
@@ -79,6 +82,7 @@ class HomeRepo {
     );
     if (response.statusCode >= 200 && response.statusCode <= 499) {
       var decodedResoponse = jsonDecode(response.body);
+      log(decodedResoponse.toString());
       if (response.statusCode >= 200 && response.statusCode <= 299) {
         return Right(MoviesResponse.fromJson(decodedResoponse));
       } else {

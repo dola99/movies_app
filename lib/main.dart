@@ -30,7 +30,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeCubit>(
-      create: (context) => HomeCubit(homerepo: HomeRepo(constant: Contsant())),
+      create: (context) =>
+          HomeCubit(homerepo: HomeRepo(constant: Contsant()))..init(),
       child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
