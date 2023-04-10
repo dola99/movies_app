@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
 import 'package:movie_app/feature/Home/componets/list_view_of_movies.dart';
+import 'package:movie_app/feature/search/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,6 +13,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const SearchView(),
+              ));
+            },
+          )
+        ],
         title: const Text('Movies'),
       ),
       body: BlocConsumer<HomeCubit, HomeState>(
@@ -25,40 +36,22 @@ class HomeScreen extends StatelessWidget {
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  TextField(
-                    onSubmitted: (value) {
-                      if (value.isNotEmpty) {
-                        cubit.searh(value);
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      hintText: 'Search movies...',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(12))),
-                    ),
-                  ),
+                  ListViewOfMovies(
+                      listMovie: cubit.upComingMovies,
+                      title: 'Upcoming Movies',
+                      stateOfList: cubit.stateForMovies[0]),
                   const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListViewOfMovies(
-                          listMovie: cubit.upComingMovies,
-                          title: 'Upcoming Movies',
-                          stateOfList: cubit.stateForMovies[0]),
-                      const SizedBox(height: 20),
-                      ListViewOfMovies(
-                          listMovie: cubit.topRatedMovies,
-                          title: 'Top Rated Movies',
-                          stateOfList: cubit.stateForMovies[1]),
-                      const SizedBox(height: 20),
-                      ListViewOfMovies(
-                          isVeritcal: true,
-                          lengthOfList: 10,
-                          listMovie: cubit.lastesmovies,
-                          title: 'Latest Movies',
-                          stateOfList: cubit.stateForMovies[2]),
-                    ],
-                  ),
+                  ListViewOfMovies(
+                      listMovie: cubit.topRatedMovies,
+                      title: 'Top Rated Movies',
+                      stateOfList: cubit.stateForMovies[1]),
+                  const SizedBox(height: 20),
+                  ListViewOfMovies(
+                      isVeritcal: true,
+                      lengthOfList: 10,
+                      listMovie: cubit.lastesmovies,
+                      title: 'Latest Movies',
+                      stateOfList: cubit.stateForMovies[2]),
                 ],
               ),
             ),

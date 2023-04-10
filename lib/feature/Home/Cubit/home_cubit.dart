@@ -21,7 +21,6 @@ class HomeCubit extends Cubit<HomeState> {
   List<Results> upComingMovies = [];
   List<Results> topRatedMovies = [];
   List<Results> lastesmovies = [];
-  List<Results> searchlist = [];
 
   Future<void> init() async {
     await Future.wait(
@@ -75,18 +74,6 @@ class HomeCubit extends Cubit<HomeState> {
 
       lastesmovies = r.results!;
       emit(HomeSucessfullyLoadedMoviesState());
-    });
-  }
-
-  Future<void> searh(String querySearch) async {
-    emit(SearchLoadingMoviesState());
-
-    final result = await homerepo.searchMovies(querySearch: querySearch);
-    result.fold((l) {
-      emit(SearchFailureMoviesState(errorMessage: l));
-    }, (r) {
-      searchlist = r.results!;
-      emit(SearchSucessfullyLoadedMoviesState());
     });
   }
 }

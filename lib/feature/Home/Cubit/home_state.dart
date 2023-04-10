@@ -15,14 +15,3 @@ class HomeFailureMoviesState extends HomeState {
 
   String get geterrorMessage => 'The Error Is$errorMessage';
 }
-
-class SearchLoadingMoviesState extends HomeState {}
-
-class SearchSucessfullyLoadedMoviesState extends HomeState {}
-
-class SearchFailureMoviesState extends HomeState {
-  final String errorMessage;
-  SearchFailureMoviesState({required this.errorMessage});
-
-  String get geterrorMessage => 'The Error Is$errorMessage';
-}
