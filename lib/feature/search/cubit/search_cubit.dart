@@ -16,7 +16,6 @@ class SearchCubit extends Cubit<SearchState> {
 
   Future<void> searh(String querySearch) async {
     emit(SearchLoadingMoviesState());
-
     final result = await searchRepo.searchMovies(querySearch: querySearch);
     result.fold((l) {
       emit(SearchFailureMoviesState(errorMessage: l));
@@ -25,5 +24,10 @@ class SearchCubit extends Cubit<SearchState> {
       print(searchlist.length);
       emit(SearchSucessfullyLoadedMoviesState(r.results!));
     });
+  }
+
+  reset() {
+    searchController.clear();
+    emit(SearchInitial());
   }
 }
