@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/Model/movie_model.dart';
-import 'package:movie_app/core/constant.dart';
 import 'package:movie_app/feature/comparison/cubit/comparison_cubit.dart';
 import 'package:movie_app/feature/favourite/cubit/favourite_cubit.dart';
 
@@ -21,6 +20,8 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return BlocConsumer<FavouriteCubit, FavouritesState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -29,8 +30,8 @@ class MovieCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 150,
-                  height: 190,
+                  width: width * .3,
+                  height: height * .24,
                   margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -45,11 +46,11 @@ class MovieCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 14,
+                SizedBox(
+                  width: width * 0.014,
                 ),
                 SizedBox(
-                    width: 130,
+                    width: width * .4,
                     child: Text(
                       titleOfMovie,
                       overflow: TextOverflow.ellipsis,
