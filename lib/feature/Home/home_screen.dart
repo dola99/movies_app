@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
 import 'package:movie_app/feature/Home/componets/list_view_of_movies.dart';
+import 'package:movie_app/feature/comparison/comparison_screen.dart';
 import 'package:movie_app/feature/favourite/favourite_screen.dart';
 import 'package:movie_app/feature/search/search_screen.dart';
 
@@ -14,6 +15,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: const Icon(Icons.compare_arrows_rounded),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ComparisonScreen(),
+              ));
+            }),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -41,7 +49,7 @@ class HomeScreen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: RefreshIndicator(
-              onRefresh: () => cubit.init(),
+              onRefresh: () => cubit.getLatestedMovies(),
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: [

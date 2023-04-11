@@ -6,6 +6,8 @@ import 'package:movie_app/core/init_app.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
 import 'package:movie_app/feature/Home/Repo/home_repo.dart';
 import 'package:movie_app/feature/Splach/splach_screen.dart';
+import 'package:movie_app/feature/comparison/Repo/comparison_repo.dart';
+import 'package:movie_app/feature/comparison/cubit/comparison_cubit.dart';
 import 'package:movie_app/feature/favourite/cubit/favourite_cubit.dart';
 
 void main() {
@@ -38,6 +40,10 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => FavouriteCubit(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ComparisonCubit(ComparisonRepo(constant: Contsant())),
         )
       ],
       child: MaterialApp(

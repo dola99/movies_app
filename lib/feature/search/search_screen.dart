@@ -75,6 +75,7 @@ class SearchScreen extends StatelessWidget {
                           itemBuilder: (context, index) => Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
                                 child: MovieCard(
+                                  movie: state.moviesList[index],
                                   id: state.moviesList[index].id!,
                                   isVeritcal: true,
                                   posterPath:

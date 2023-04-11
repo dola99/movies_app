@@ -69,6 +69,7 @@ class ListViewOfMovies extends StatelessWidget {
                 itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: MovieCard(
+                        movie: listMovie[index],
                         isVeritcal: isVeritcal,
                         id: listMovie[index].id!,
                         posterPath: listMovie[index].posterPath!,

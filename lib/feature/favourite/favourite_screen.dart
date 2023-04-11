@@ -27,6 +27,7 @@ class FavouriteView extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: MovieCard(
                         isVeritcal: true,
+                        movie: cubit.getFavouritesList()[index],
                         id: cubit.getFavouritesList()[index].id!,
                         posterPath:
                             cubit.getFavouritesList()[index].posterPath!,
