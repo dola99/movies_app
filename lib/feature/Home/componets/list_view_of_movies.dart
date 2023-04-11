@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Model/movie_model.dart';
 import 'package:movie_app/Model/movies_model.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
 import 'package:movie_app/feature/Home/componets/loading_widget.dart';
 import 'package:movie_app/feature/Home/widget/movie_card.dart';
 
 class ListViewOfMovies extends StatelessWidget {
-  final List<Results> listMovie;
+  final List<Movie> listMovie;
   final dynamic stateOfList;
   final String title;
   final bool isVeritcal;
@@ -69,6 +70,7 @@ class ListViewOfMovies extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: MovieCard(
                         isVeritcal: isVeritcal,
+                        id: listMovie[index].id!,
                         posterPath: listMovie[index].posterPath!,
                         titleOfMovie: '${listMovie[index].title}',
                       ),

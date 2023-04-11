@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/Model/movie_model.dart';
 import 'package:movie_app/Model/movies_model.dart';
 import 'package:movie_app/feature/Home/Repo/home_repo.dart';
 
@@ -18,9 +19,9 @@ class HomeCubit extends Cubit<HomeState> {
     HomeInitial()
   ];
 
-  List<Results> upComingMovies = [];
-  List<Results> topRatedMovies = [];
-  List<Results> lastesmovies = [];
+  List<Movie> upComingMovies = [];
+  List<Movie> topRatedMovies = [];
+  List<Movie> lastesmovies = [];
 
   Future<void> init() async {
     await Future.wait(

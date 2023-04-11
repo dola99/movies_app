@@ -6,9 +6,10 @@ import 'package:movie_app/core/init_app.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
 import 'package:movie_app/feature/Home/Repo/home_repo.dart';
 import 'package:movie_app/feature/Splach/splach_screen.dart';
+import 'package:movie_app/feature/favourite/cubit/favourite_cubit.dart';
 
 void main() {
-  InitApp().call();
+  InitApp().init();
   runApp(const MyApp());
 }
 
@@ -29,9 +30,16 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<HomeCubit>(
-      create: (context) =>
-          HomeCubit(homerepo: HomeRepo(constant: Contsant()))..init(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              HomeCubit(homerepo: HomeRepo(constant: Contsant()))..init(),
+        ),
+        BlocProvider(
+          create: (context) => FavouriteCubit(),
+        )
+      ],
       child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,

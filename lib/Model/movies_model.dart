@@ -1,9 +1,10 @@
-import 'package:movie_app/core/constant.dart';
+import 'package:hive/hive.dart';
+import 'package:movie_app/Model/movie_model.dart';
 
 class MoviesResponse {
   Dates? dates;
   int? page;
-  List<Results>? results;
+  List<Movie>? results;
   int? totalPages;
   int? totalResults;
 
@@ -18,9 +19,9 @@ class MoviesResponse {
     dates = json['dates'] != null ? Dates.fromJson(json['dates']) : null;
     page = json['page'];
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <Movie>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        results!.add(Movie.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
@@ -57,76 +58,6 @@ class Dates {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['maximum'] = maximum;
     data['minimum'] = minimum;
-    return data;
-  }
-}
-
-class Results {
-  bool? adult;
-  String? backdropPath;
-  List<dynamic>? genreIds;
-  int? id;
-  String? originalLanguage;
-  String? originalTitle;
-  String? overview;
-  double? popularity;
-  String? posterPath;
-  String? releaseDate;
-  String? title;
-  bool? video;
-  num? voteAverage;
-  int? voteCount;
-
-  Results(
-      {this.adult,
-      this.backdropPath,
-      this.genreIds,
-      this.id,
-      this.originalLanguage,
-      this.originalTitle,
-      this.overview,
-      this.popularity,
-      this.posterPath,
-      this.releaseDate,
-      this.title,
-      this.video,
-      this.voteAverage,
-      this.voteCount});
-
-  Results.fromJson(Map<String, dynamic> json) {
-    adult = json['adult'];
-    backdropPath = "https://image.tmdb.org/t/p/w500${json['backdrop_path']}";
-
-    genreIds = json['genre_ids'];
-    id = json['id'];
-    originalLanguage = json['original_language'];
-    originalTitle = json['original_title'];
-    overview = json['overview'];
-    popularity = json['popularity'];
-    posterPath = "https://image.tmdb.org/t/p/w500${json['poster_path']}";
-    releaseDate = json['release_date'];
-    title = json['title'];
-    video = json['video'];
-    voteAverage = json['vote_average'];
-    voteCount = json['vote_count'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['adult'] = adult;
-    data['backdrop_path'] = backdropPath;
-    data['genre_ids'] = genreIds;
-    data['id'] = id;
-    data['original_language'] = originalLanguage;
-    data['original_title'] = originalTitle;
-    data['overview'] = overview;
-    data['popularity'] = popularity;
-    data['poster_path'] = posterPath;
-    data['release_date'] = releaseDate;
-    data['title'] = title;
-    data['video'] = video;
-    data['vote_average'] = voteAverage;
-    data['vote_count'] = voteCount;
     return data;
   }
 }

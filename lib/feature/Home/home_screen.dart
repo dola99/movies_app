@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
 import 'package:movie_app/feature/Home/componets/list_view_of_movies.dart';
+import 'package:movie_app/feature/favourite/favourite_screen.dart';
 import 'package:movie_app/feature/search/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,6 +20,14 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const SearchView(),
+              ));
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const FavouriteView(),
               ));
             },
           )

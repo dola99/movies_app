@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/Model/movie_model.dart';
 import 'package:movie_app/Model/movies_model.dart';
 import 'package:movie_app/feature/search/search_repo.dart';
 
@@ -11,7 +12,7 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.searchRepo) : super(SearchInitial());
   static SearchCubit get(BuildContext context) => BlocProvider.of(context);
 
-  List<Results> searchlist = [];
+  List<Movie> searchlist = [];
   TextEditingController searchController = TextEditingController();
 
   Future<void> searh(String querySearch) async {
