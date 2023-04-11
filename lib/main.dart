@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:movie_app/bootstrap.dart';
@@ -51,6 +52,23 @@ class _MyAppState extends State<MyApp> {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            appBarTheme: AppBarTheme(
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: Colors.transparent,
+                  systemNavigationBarColor: Colors.transparent,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                  statusBarIconBrightness: Brightness.dark,
+                ),
+                color: Theme.of(context).scaffoldBackgroundColor,
+                foregroundColor: Colors.black,
+                centerTitle: true,
+                titleTextStyle: const TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Poppins',
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold),
+                elevation: 0.0,
+                actionsIconTheme: const IconThemeData(color: Colors.black)),
             // This is the theme of your application.
             //
             // Try running your application with "flutter run". You'll see the
