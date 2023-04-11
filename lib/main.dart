@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:movie_app/bootstrap.dart';
 import 'package:movie_app/core/constant.dart';
 import 'package:movie_app/core/init_app.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
@@ -12,7 +13,7 @@ import 'package:movie_app/feature/favourite/cubit/favourite_cubit.dart';
 
 void main() {
   InitApp().init();
-  runApp(const MyApp());
+  bootstrap(() => const MyApp());
 }
 
 class MyApp extends StatefulWidget {

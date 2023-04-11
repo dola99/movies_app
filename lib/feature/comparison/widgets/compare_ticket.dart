@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/Model/movie_details_model.dart';
 import 'package:movie_app/Model/movie_model.dart';
 import 'package:movie_app/feature/favourite/cubit/favourite_cubit.dart';
@@ -35,38 +36,44 @@ class CompareTicket extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 5.0,
-                  right: 20,
-                  child: InkWell(
-                    onTap: () {
-                      FavouriteCubit.get(context)
-                              .isFavourite(movieDetailsModel.id!)
-                          ? FavouriteCubit.get(context)
-                              .removeFromFavourites(movieDetailsModel.id!)
-                          : FavouriteCubit.get(context).addToFavourites(Movie(
-                              posterPath: movieDetailsModel.posterPath!,
-                              title: movieDetailsModel.title,
-                              id: movieDetailsModel.id));
-                    },
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.7)),
-                      child: Center(
-                        child: Icon(
-                          Icons.favorite,
-                          size: 20,
-                          color: FavouriteCubit.get(context)
+                BlocConsumer<FavouriteCubit, FavouritesState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return Positioned(
+                      top: 5.0,
+                      right: 20,
+                      child: InkWell(
+                        onTap: () {
+                          FavouriteCubit.get(context)
                                   .isFavourite(movieDetailsModel.id!)
-                              ? Colors.red
-                              : Colors.grey,
+                              ? FavouriteCubit.get(context)
+                                  .removeFromFavourites(movieDetailsModel.id!)
+                              : FavouriteCubit.get(context).addToFavourites(
+                                  Movie(
+                                      posterPath: movieDetailsModel.posterPath!,
+                                      title: movieDetailsModel.title,
+                                      id: movieDetailsModel.id));
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.7)),
+                          child: Center(
+                            child: Icon(
+                              Icons.favorite,
+                              size: 20,
+                              color: FavouriteCubit.get(context)
+                                      .isFavourite(movieDetailsModel.id!)
+                                  ? Colors.red
+                                  : Colors.grey,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             ),

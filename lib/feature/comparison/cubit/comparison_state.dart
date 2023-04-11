@@ -9,6 +9,8 @@ abstract class ComparisonState extends Equatable {
 
 class ComparisonInitial extends ComparisonState {}
 
+class ComparisonLoadingStateInitial extends ComparisonState {}
+
 class ComparisonUpdated extends ComparisonState {
   final List<MovieDetailsModel> selectedMovies;
 

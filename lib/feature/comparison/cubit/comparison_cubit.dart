@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +27,10 @@ class ComparisonCubit extends Cubit<ComparisonState> {
   }
 
   void selectMovie(Movie movie) async {
+    emit(ComparisonLoadingStateInitial());
+    if (_selectedMovies.any((element) => element.id == movie.id)) {
+      return;
+    }
     if (_selectedMovies.length == 2) {
       _selectedMovies.removeAt(0);
     }
@@ -32,6 +38,7 @@ class ComparisonCubit extends Cubit<ComparisonState> {
     selectedMovie.crewModel = await getMovieActors(movie.id!);
     selectedMovie.posterPath = movie.posterPath;
     _selectedMovies.add(selectedMovie);
+
     emit(ComparisonUpdated(_selectedMovies));
   }
 
@@ -44,5 +51,10 @@ class ComparisonCubit extends Cubit<ComparisonState> {
     return state is ComparisonUpdated
         ? (state as ComparisonUpdated).selectedMovies
         : [];
+  }
+
+  bool isCompared(String originalTitle) {
+    return _selectedMovies
+        .any((element) => element.originalTitle == originalTitle);
   }
 }

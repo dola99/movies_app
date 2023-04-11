@@ -12,6 +12,13 @@ class ComparisonScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                ComparisonCubit.get(context).clearMovies();
+              },
+              icon: const Icon(Icons.restore_rounded))
+        ],
         title: const Text('Comparsion Screen'),
       ),
       body: BlocConsumer<ComparisonCubit, ComparisonState>(

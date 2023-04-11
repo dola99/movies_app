@@ -132,32 +132,38 @@ class MovieCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: 5.0,
-                        right: 20,
-                        child: InkWell(
-                          onTap: () {
-                            ComparisonCubit.get(context).selectMovie(movie);
-                          },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white.withOpacity(0.7)),
-                            child: Center(
-                              child: Icon(
-                                Icons.compare_arrows_rounded,
-                                size: 20,
-                                color:
-                                    FavouriteCubit.get(context).isFavourite(id)
-                                        ? Colors.red
-                                        : Colors.grey,
+                      BlocConsumer<ComparisonCubit, ComparisonState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            return Positioned(
+                              bottom: 5.0,
+                              right: 20,
+                              child: InkWell(
+                                onTap: () {
+                                  print('sdsad');
+                                  ComparisonCubit.get(context)
+                                      .selectMovie(movie);
+                                },
+                                child: Container(
+                                  width: 30,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white.withOpacity(0.7)),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.compare_arrows_rounded,
+                                      size: 20,
+                                      color: ComparisonCubit.get(context)
+                                              .isCompared(movie.originalTitle!)
+                                          ? Colors.red
+                                          : Colors.grey,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            );
+                          }),
                     ],
                   ),
                 ),

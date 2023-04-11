@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/feature/Home/Cubit/home_cubit.dart';
 import 'package:movie_app/feature/Home/componets/list_view_of_movies.dart';
 import 'package:movie_app/feature/comparison/comparison_screen.dart';
+import 'package:movie_app/feature/comparison/cubit/comparison_cubit.dart';
 import 'package:movie_app/feature/favourite/favourite_screen.dart';
 import 'package:movie_app/feature/search/search_screen.dart';
 
@@ -15,14 +17,28 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            icon: const Icon(Icons.compare_arrows_rounded),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const ComparisonScreen(),
-              ));
-            }),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0.0,
+        actionsIconTheme: const IconThemeData(color: Colors.black),
         actions: [
+          BlocConsumer<ComparisonCubit, ComparisonState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is ComparisonLoadingStateInitial) {
+                return const Padding(
+                  padding: EdgeInsets.all(25.0),
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              }
+              return IconButton(
+                  icon: const Icon(Icons.compare_arrows_rounded),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ComparisonScreen(),
+                    ));
+                  });
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
@@ -40,7 +56,10 @@ class HomeScreen extends StatelessWidget {
             },
           )
         ],
-        title: const Text('Movies'),
+        title: const Text(
+          'Movies',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {},
